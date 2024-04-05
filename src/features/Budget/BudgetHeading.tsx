@@ -1,13 +1,13 @@
 import { useDispatch } from "react-redux";
 import { setDate } from "../../redux/slices/dateSlice";
-import type { BudgetType } from "../../utils/appTypes";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 type BudgetHeadingProps = {
   queryDate: string
-  budget?: BudgetType | null
 }
 
-const BudgetHeading = ({queryDate, budget}: BudgetHeadingProps) => {
+const BudgetHeading = ({queryDate}: BudgetHeadingProps) => {
   const dispatch = useDispatch();
   const date = new Date(queryDate);
 
@@ -37,8 +37,8 @@ const BudgetHeading = ({queryDate, budget}: BudgetHeadingProps) => {
         <span className="text-gray-500"> {date.getFullYear()}</span>
       </h1>
       <div className="budget-heading-btns-container">
-        <button onClick={() => handleMonthChange(-1)}>DECREMENT</button>
-        <button onClick={() => handleMonthChange(1)}>INCREMENT</button>
+        <button onClick={() => handleMonthChange(-1)}> <FontAwesomeIcon icon={faChevronLeft}/> </button>
+        <button onClick={() => handleMonthChange(1)}><FontAwesomeIcon icon={faChevronRight}/></button>
       </div>
     </div>
   );

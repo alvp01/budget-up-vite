@@ -10,13 +10,14 @@ type BudgetDataType = {
 type BudgetItemsProps = {
   budgetData: BudgetDataType
   refetchBudget: () => void
+  queryDateObject: Date
 }
 
-const BudgetItems = ({ budgetData, refetchBudget }: BudgetItemsProps) => {
+const BudgetItems = ({ budgetData, refetchBudget, queryDateObject }: BudgetItemsProps) => {
 
   return (
     <div className="budget-items" id="budget-items">
-      { budgetData.existing_budget ? <Budget {...budgetData.budget!}/> : <BudgetForm refetchBudget={refetchBudget}/> }
+      { budgetData.existing_budget ? <Budget {...budgetData.budget!}/> : <BudgetForm refetchBudget={refetchBudget} queryDateObject={queryDateObject}/> }
     </div>
   )
 }

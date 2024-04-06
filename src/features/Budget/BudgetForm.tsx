@@ -3,7 +3,12 @@ import { ChangeEvent, useState } from "react";
 import axios from "axios";
 import type { BudgetType } from "../../utils/appTypes";
 
-const BudgetForm = ({ refetchBudget }: { refetchBudget: () => void }) => {
+type BudgetFormProps = {
+  refetchBudget: () => void
+  queryDateObject: Date
+}
+
+const BudgetForm = ({ refetchBudget, queryDateObject }: BudgetFormProps) => {
   const createBudget = useMutation({
     mutationFn: (budget: BudgetType) => {
       return axios.post('http://localhost:3001/api/v1/budgets', budget)

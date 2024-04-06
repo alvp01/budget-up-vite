@@ -7,8 +7,8 @@ import BudgetItems from "../features/Budget/BudgetItems";
 import BudgetHeading from "../features/Budget/BudgetHeading";
 
 const MainPage = () => {
-  const queryDate = useSelector((state: RootState) => state.date.date);
-  const dateObject = new Date(queryDate);
+  const queryDateString = useSelector((state: RootState) => state.date.date);
+  const queryDateObject = new Date(queryDateString);
 
   const { 
     error,
@@ -17,8 +17,8 @@ const MainPage = () => {
     isLoading,
     refetch: refetchBudget,
   } = useQuery({
-    queryKey: ['budgetData', queryDate],
-    queryFn: () => BudgetService.getBudgetByYearAndMonth(dateObject.getFullYear(), dateObject.getMonth() + 1),
+    queryKey: ['budgetData', queryDateString],
+    queryFn: () => BudgetService.getBudgetByYearAndMonth(queryDateObject.getFullYear(), queryDateObject.getMonth() + 1),
   });
 
 
@@ -27,8 +27,8 @@ const MainPage = () => {
 
   return (
     <div className="main-page full-height full-width" id="main-page">
-      <BudgetHeading queryDate={queryDate}/>
-      { isLoading ? <Loader fullPage={true} message="budgets" /> : <BudgetItems budgetData={budgetData!} refetchBudget={refetchBudget}/>}
+      <BudgetHeading queryDateObject={queryDateObject}/>
+      { isLoading ? <Loader fullPage={true} message="budgets" /> : <BudgetItems budgetData={budgetData!} refetchBudget={refetchBudget} queryDateObject={queryDateObject}/>}
     </div>
   );
 };
